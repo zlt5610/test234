@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/form/form1" method="post">
+    {% csrf_token %}
+    <p>
+        <label id="{{ stu_Form.sname.id_for_label }}">{{ stu_Form.sname.label }}</label>{{ stu_Form.sname }}<span>{{ stu_Form.errors.sname|striptags }}</span>
+    </p>
+    <p>
+        <label id="{{ cls_Form.cname.id_for_label }}">{{ cls_Form.cname.label }}</label>{{ cls_Form.cname }}<span>{{ cls_Form.errors.cname|striptags }}</span>
+    </p>
+    <input type="submit" value="注册">
+
+</form>
+</body>
+</html>

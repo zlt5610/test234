@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+    <select id="province" onchange="loadCity();"></select>
+    <select id="city"  onchange="loadTown();"></select>
+    <select id="town"></select>
+
+
+    <script>
+        $(function(){
+            loadProvince();
+        });
+
+        function loadProvince() {
+            loadArea(0,'province',loadCity);
+        }
+
+        function loadCity() {
+            loadArea($('#province').val(),'city',loadTown);
+        }
+
+        function loadTown() {
+            loadArea($('#city').val(),'town');
+        }
+
+
+        function loadArea(pid,selectId,nextLoad){
+            $('#'+selectId).empty();
+
+            $.get('/stu/getInfo/',{'pid':pid},function (result) {
+                console.log(result.jareaList)
+                var areaList = JSON.parse(result.jareaList);
+                for(var i=0;i<areaList.length;i++){
+                    var area = areaList[i];
+
+                    $('#'+selectId).append("<option value='"+area.pk+"'>"+area.fields.areaname+"</option>");
+                }
+
+                if(nextLoad!=null){
+                    nextLoad();
+                }
+
+
+            });
+        }
+
+    </script>
+
+</body>
+</html>

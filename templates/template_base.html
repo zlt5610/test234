@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+
+    {% endblock %}</title>
+</head>
+<body>
+{% include 'template_top.html' %}
+{% block main %}
+
+{% endblock %}
+
+{% include 'template_footer.html' %}
+</body>
+</html>

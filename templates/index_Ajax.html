@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+<input type="button" onclick="getAjax();" value="GetAjax"/>
+<input type="button" onclick="postAjax();" value="PostAjax"/>
+<input type="button" onclick="customAjax();" value="CustomAjax"/>
+{% csrf_token %}
+<script>
+    function getAjax() {
+        $.get('/ajax/get/','uname=zhangsan',function (result) {
+            alert(result.flag)
+        });
+
+        alert('hello world')
+    }
+    function postAjax() {
+        var csrf=$('input[name="csrfmiddlewaretoken"]').val();
+        $.post('/ajax/post/',{'uname':'lisi',"csrfmiddlewaretoken":csrf},function (result) {
+            alert(result.flag);
+        })
+    }
+        function customAjax() {
+        var csrf=$('input[name="csrfmiddlewaretoken"]').val();
+        $.ajax({
+            url:'/ajax/custom/',
+            data:{'uname':'wangwu','csrfmiddlewaretoken':csrf},
+            type:'POST',
+            async:true,
+            success:function(result){
+                alert(result.flag)
+            }
+        });
+
+        alert('hello123');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% load myfilter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{ str1|md|safe}}<br/>
+    {{ str2|split1:'0,4' }}
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .redSpan{
+            color:red;
+        }
+        .greenSpan{
+            color: green;
+        }
+    </style>
+    <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.9.1/jquery.min.js">
+
+    </script>
+</head>
+<body>
+    <input type="text" id="sname" onblur="checkName(this.value)"/><span id="snameSpan"></span>
+
+    <script>
+        function checkName(txt) {
+            var reg=/^\w{3,8}$/gi;
+            //判断是否为空
+            if(txt.length==0){
+                $('#snameSpan').html('用户名不能为空！');
+                $('#snameSpan').css('color','red')
+            }else if(reg.test(txt)){
+                $.get('/ajax_register/getInfo/',{'sname':txt},function (result) {
+                    var flag=result.flag;
+                    if(flag){
+                        $('#snameSpan').html('用户名已存在！');
+                        $('#snameSpan').css('color','red')
+                    }else{
+                        $('#snameSpan').html('用户名不存在！');
+                        $('#snameSpan').css('color','green')
+                    }
+                })
+            }else{
+                $('#snameSpan').html('用户名格式不正确！');
+                $('#snameSpan').addClass('redSpan')
+            }
+        }
+    </script>
+</body>
+</html>

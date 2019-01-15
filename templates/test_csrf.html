@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/csrf/login" method="post">
+    <!--1、解析隐藏域标签  2、将随机字符串存放至request.Meta['CSRF_COOKIE']=随机字符串-->
+    {% csrf_token %}
+    <input type="submit" value="login"/>
+
+</form>
+</body>
+</html>
